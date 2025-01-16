@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup Page</title>
+    <style>
+        /* Basic reset for all elements to avoid default margin, padding, and box-sizing issues */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body styles to center the content vertically and horizontally on the page */
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+            height: 100vh;          
+            background-color: #f0f0f0;
+        }
+
+        /* Container that holds both the login and signup forms */
+        .container {
+            width: 1000px;              
+            height: 600px;              
+            display: flex;             
+            position: relative;        
+            overflow: hidden;          
+            background: linear-gradient(to bottom right, #1e90ff, #00bfff); /* Gradient background */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+        }
+
+        /* Common styles for the form containers (login and signup) */
+        .formContainer {
+            width: 50%;                
+            height: 100%;             
+            position: absolute;        
+            top: 0;                    /* Top edge of the container */
+            background-color: white;  
+            display: flex;             /* Flexbox for centering form content */
+            flex-direction: column;  
+            justify-content: center;   /* Center the items vertically */
+            align-items: center;       /* Center the items horizontally */
+            transition: transform 0.6s ease-in-out; /* Smooth transition for sliding animation */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* Login form container starts from the left side */
+        .formContainerLogin {
+            left: 0;                   /* Position it to the left edge */
+        }
+
+        /* Signup form container starts from the right and is hidden initially */
+        .formContainerSignup {
+            right: 0;                  /* Position it to the right edge */
+            transform: translateX(100%); /* Initially translate the form offscreen */
+        }
+
+        /* Form container styles to ensure form elements look neat */
+        .form {
+            width: 70%;              /* Form occupies 70% of its container */
+            text-align: center;      /* Center the text inside the form */
+        }
+
+        /* Heading styles for the form */
+        .form h1 {
+            margin-bottom: 20px;     /* Add space below the heading */
+            color: #0072ff;          /* Blue color for the heading */
+        }
+
+        /* Style for input fields to make them user-friendly */
+        .form input {
+            width: 100%;            
+            padding: 10px;          
+            margin: 10px 0;          
+            border: 1px solid #ccc;  /* Light border for input fields */
+            border-radius: 5px;      
+        }
+
+        /* Button styles for the form submit button */
+        .form button {
+            width: 100%;            
+            padding: 10px;           
+            background-color: #ff5722; /* Orange color for the button */
+            border: none;            
+            border-radius: 5px;      
+            color: white;          
+            font-size: 16px;         
+            cursor: pointer;        /* Pointer cursor on hover */
+        }
+
+        /* Hover effect for the button */
+        .form button:hover {
+            background-color: #e64a19; /* Darker shade of orange on hover */
+        }
+
+        /* Sliding effect for shifting form containers when switching */
+        .containerShiftLeft .formContainerLogin {
+            transform: translateX(-100%); /* Move login form to the left */
+        }
+
+        .containerShiftLeft .formContainerSignup {
+            transform: translateX(0);  /* Bring the signup form to the center */
+        }
+
+        /* Container for the info text (e.g., As a member or As an admin) */
+        .infoContainer {
+            width: 100%;            
+            max-width: 400px;        
+            background-color: #0072ff; /* Blue background */
+            color: white;           
+            padding: 10px;          
+            text-align: center;     
+            margin-bottom: 20px;     
+            border-radius: 5px;     
+        }
+
+        /* Container for welcome message (both Member and Admin) */
+        .socialiteContainer {
+            position: absolute;      
+            top: 50%;                /* Vertically center the container */
+            font-size: 50px;        
+            color: white;            /* White text color */
+            font-family: 'Roboto', sans-serif; /* Custom font family */
+            font-weight: bold;       /* Bold text */
+            letter-spacing: 2px;    
+            text-align: center;      /* Center the text horizontally */
+            width: 100%;             
+            display: flex;           /* Use flexbox to center content */
+            justify-content: center; 
+            align-items: center;     
+            transform: translateY(-50%); /* Center vertically by adjusting */
+            flex-direction: column;  /* Stack the text vertically */
+        }
+
+        /* Position "Welcome Member" when gradient is on the right */
+        .container:not(.containerShiftLeft) .welcomeMember {
+            left: 75%;              /* Position it towards the right side */
+            transform: translateX(-50%) translateY(-50%); /* Center it within the right side */
+            opacity: 1;             /* Make it visible */
+        }
+
+        /* Position "Welcome Admin" when gradient is on the left */
+        .container.containerShiftLeft .welcomeAdmin {
+            left: 25%;              /* Position it towards the left side */
+            transform: translateX(-50%) translateY(-50%); /* Center it within the left side */
+            opacity: 1;             /* Make it visible */
+        }
+
+        /* Hide the message that is not relevant based on the form state */
+        .container.containerShiftLeft .welcomeMember,
+        .container:not(.containerShiftLeft) .welcomeAdmin {
+            opacity: 0;             /* Hide the irrelevant message */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Main container holding everything -->
+    <div class="container" id="container">
+        
+        <!-- Welcome Message for Member (appears when gradient is on the right) -->
+        <div class="socialiteContainer welcomeMember">
+            <div>Socialite</div>   
+            <div>Member</div>    
+        </div>
+        
+        <!-- Welcome Message for Admin (appears when gradient is on the left) -->
+        <div class="socialiteContainer welcomeAdmin">
+            <div>Socialite</div>   
+            <div>Admin</div>    
+        </div>
+
+        <!-- Login Form Container -->
+        <div class="formContainer formContainerLogin">
+            <form class="form">
+                <h1>Log In</h1> 
+                <div class="infoContainer">As a member</div> 
+                <input type="email" placeholder="Email" required>  <!-- Email input -->
+                <input type="password" placeholder="Password" required>  <!-- Password input -->
+
+                <button type="submit">LOG IN</button> 
+                <p>Login as an admin? <a href="#" id="switchToSignup">Click here</a></p> <!-- Link to switch to signup -->
+            </form>
+        </div>
+
+        <!-- Signup Form Container -->
+        <div class="formContainer formContainerSignup">
+            <form class="form">
+                <h1>Log In</h1>  
+                <div class="infoContainer">As an admin</div> 
+                <input type="email" placeholder="Email" required>  
+                <input type="password" placeholder="Password" required>  
+                <button type="submit">LOG IN</button>  
+                <p>Login as a member? <a href="#" id="switchToLogin">Click here</a></p> <!-- Link to switch to login -->
+            </form>
+        </div>
+    </div>
+
+    <!-- Script to switch between login and signup -->
+    <script>
+        const container = document.getElementById('container');
+        const switchToSignup = document.getElementById('switchToSignup');
+        const switchToLogin = document.getElementById('switchToLogin');
+
+        /* Event listener to switch to signup form */
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            container.classList.add('containerShiftLeft');  /* Apply class to shift to signup */
+        });
+
+        /* Event listener to switch to login form */
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            container.classList.remove('containerShiftLeft');  /* Remove class to shift back to login */
+        });
+    </script>
+</body>
+</html>
