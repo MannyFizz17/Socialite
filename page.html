@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socialite</title> <!-- page title -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"> <!-- Google Fonts (taken from net) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Icons (like email and lock) -->
+    <link rel="stylesheet" href="assets/styles2.css"> 
+</head>
+<body>
+    <div class="container">
+        <!--blue Gradient Sliding Container -->
+        <div class="gradientSlide" id="gradientSlide">
+            <img src="ice.png" alt="Logo"> <!-- logo image -->
+            <div><h2 style="font-family: Crutsen">Socialite</h2></div> 
+            <span class="membersText">Members</span> <!-- members text -->
+            <span class="adminText">Admin</span> <!-- admin text -->
+        </div>
+
+        <!-- left Form Box -->
+        <div class="formBox" id="leftForm">
+            <h2>Log In</h2> <!-- form heading -->
+            <div class="blueContainer">As a member</div> <!-- blue container -->
+            <form id="loginForm"> <!-- login form -->
+                <div class="inputGroup">
+                    <i class="fas fa-envelope"></i> <!-- email icon -->
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="inputGroup">
+                    <i class="fas fa-lock"></i> <!-- password icon -->
+                    <input type="password" placeholder="Password" required> 
+                </div>
+                <div class="rememberMe">
+                    <input type="checkbox" id="rememberMe"> <!-- remember me checkbox -->
+                    <label for="rememberMe">Remember Me</label> <!-- checkbox label -->
+                </div>
+                <button class="btn" type="submit">LOG IN</button> <!-- submit button -->
+                <a href="#" class="forgotPassword">Forgot Password?</a> <!-- forgot password link -->
+                <div class="socialLogin">
+                    <p>Or log in with:</p> <!-- login text -->
+                    <button type="button" class="btnSocial">
+                        <i class="fab fa-google"></i> Google <!-- google icon -->
+                    </button>
+                </div>
+                <div class="loadingSpinner" id="loadingSpinner">
+                    <i class="fas fa-spinner"></i> Logging in... <!-- loading spinner -->
+                </div>
+            </form>
+            <div class="switchLink">
+                Login as an admin? <a href="#" onclick="shiftContainer()">Click here</a> <!-- switch link -->
+            </div>
+        </div>
+
+        <!-- right Form Box -->
+        <div class="formBox">
+            <h2>Log In</h2> <!-- form heading -->
+            <div class="blueContainer">As an admin</div> <!-- blue container -->
+            <form id="adminLoginForm">
+                <div class="inputGroup">
+                    <i class="fas fa-envelope"></i> <!-- email icon -->
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="inputGroup">
+                    <i class="fas fa-lock"></i> <!-- password icon -->
+                    <input type="password" placeholder="Password" required> 
+                </div>
+                <div class="rememberMe">
+                    <input type="checkbox" id="rememberMe"> <!-- remember me checkbox -->
+                    <label for="rememberMe">Remember Me</label> <!-- checkbox label -->
+                </div>
+                <button class="btn" type="submit">LOG IN</button> <!-- submit button -->
+                <a href="#" class="forgotPassword">Forgot Password?</a> <!-- forgot password link -->
+                <div class="socialLogin">
+                    <p>Or log in with:</p> <!-- login text -->
+                    <button type="button" class="btnSocial">
+                        <i class="fab fa-google"></i> Google <!-- google icon -->
+                    </button>
+                </div>
+                <div class="loadingSpinner" id="loadingSpinnerAdmin">
+                    <i class="fas fa-spinner"></i> Logging in... <!-- loading spinner -->
+                </div>
+            </form>
+            <div class="switchLink">
+                Login as a member? <a href="#" onclick="shiftContainer()">Click here</a> <!-- switch link -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- external Js file -->
+</body>
+</html>

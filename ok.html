@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up Socialite</title>
+    <!--for various icons used, like email, password etc-->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* reset all margins and paddings to ensure consistency across browsers*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* set the body font and center the content */
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            /*creates a flexible layout for its child elements*/
+            justify-content: center;
+            /* centers content horizontally*/
+            align-items: center;
+            /* centers content vertically*/
+            min-height: 100vh;
+            /* ensures the body takes at least the full viewport height*/
+            background: hsl(0, 8%, 97%);
+            /*hsl=hue, saturation, and lightness*/
+            position: relative;
+        }
+
+        /* company logo styling. */
+        .company-logo {
+            position: absolute;
+            /* positions the logo absolutely within the body*/
+            top: 20px;
+            /*space from top*/
+            left: 15px;
+            /*space from left*/
+            display: flex;
+            /*creates a flexible layout for its child elements*/
+            align-items: center;
+            gap: 15px;
+            /* adds space between logo and text*/
+            z-index: 3;
+            /* ensures the logo stays above other elements*/
+        }
+
+        .logo-image {
+            width: 45px;
+            /*height and width of the circle*/
+            height: 45px;
+            border-radius: 50%;
+            /* makes the logo circular. */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /*shadow*/
+        }
+
+        .company-name {
+            font-weight: 750;
+            /* bold font weight for the Socialite name*/
+            color: #333;
+            /* dark gray color for the text*/
+            margin-left: 0px;
+            /*to remove default margin*/
+        }
+
+        /* main container styling. */
+        .content-box {
+            display: flex;
+            /*creates a flexible layout for its child elements*/
+            justify-content: space-around;
+            /* distributes space evenly around items*/
+            align-items: flex-start;
+            /* aligns items to the top*/
+            gap: 50px;
+            /* adds space between left and right halves*/
+            width: 90%;
+            max-width: 1000px;
+            /* limits the maximum width of the container*/
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            /* allows absolute positioning of child elements*/
+            overflow: hidden;
+            /* hides any overflowing content */
+            z-index: 2;
+            /* ensures the container stays above the background*/
+        }
+
+        /* left half of the main container */
+        .left-half {
+            flex: 1;
+            /* takes up equal space in the flex container */
+            padding: 43px;
+            text-align: center;
+            background: #fdfdfd;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            min-height: 450px;
+        }
+
+        /* right half of the main container */
+        .right-half {
+            flex: 1;
+            /* takes up equal space in the flex container */
+            padding: 30px;
+            text-align: center;
+            background: #fdfdfd;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            min-height: 450px;
+        }
+
+        /* profile upload styling */
+        .profile-upload {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        /* profile preview image styling. */
+        .profile-preview {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            /* makes the image circular*/
+            object-fit: cover;
+            /* ensures the image covers the entire area*/
+            margin: 0 auto;
+            display: block;
+            /* ensures the image is treated as a block element*/
+            border: 3px solid #000000;
+            /* adds a border around the image*/
+        }
+
+        /* input field styling */
+        .inputGroup {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .inputGroup i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            /* fine-tunes vertical centering*/
+            color: #888;
+            font-size: 20px;
+        }
+
+        .inputGroup input {
+            width: 100%;
+            padding: 12px 50px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+            /* smooth transition for border color*/
+        }
+
+        .inputGroup input:focus {
+            border-color: #007bff;
+            /* changes border color on focus*/
+            outline: none;
+            /* removes the default outline*/
+        }
+
+        /* button styling*/
+        button {
+            background-color: #ff5722;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            /* removes the default border*/
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            /* bold font weight*/
+            cursor: pointer;
+            /* changes the cursor to a pointer on hover*/
+            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            /* smooth transitions*/
+            margin: 10px 0;
+        }
+
+        /* button hover state*/
+        button:hover {
+            background-color: #e64a19;
+            /* darker orange on hover*/
+            box-shadow: 0 6px 15px rgba(255, 87, 34, 0.5);
+            /* darker shadow on hover*/
+        }
+
+        /* additional buttons styling which are different from default button styling */
+        .b1 {
+            background-color: #007bff;
+            margin-bottom: 19.8%;
+            /* adds space below the button*/
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .b1:hover {
+            background-color: #0056b3;
+            /* darker blue on hover*/
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
+            /* darker blue shadow on hover*/
+        }
+
+        .b2 {
+            background-color: #007bff;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            /* blue shadow*/
+        }
+
+        .b2:hover {
+            background-color: #0056b3;
+            /*darker blue on hover*/
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
+        }
+
+        /* bottom button styling*/
+        .bottom-buttons {
+            position: absolute;
+            bottom: 30px;
+            /* positions the buttons at the bottom*/
+            top: 685px;
+            /* adds space from the top*/
+            right: 17%;
+            /* positions the buttons to the right*/
+            z-index: 1;
+            /* ensures the buttons stay above the background*/
+        }
+
+        .bottom-buttons button {
+            background: none;
+            /* removes the background color*/
+            color: #666;
+            padding: 8px 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            /* sets the font size 90 percent of the root element's font sizr*/
+            font-weight: 500;
+            /* medium font weight*/
+            cursor: pointer;
+            /* changes the cursor to a pointer on hover*/
+            transition: all 0.3s ease;
+            /* smooth transitions*/
+            gap: 8px;
+            box-shadow: 0 3px 10px rgba(128, 128, 128, 0.3);
+            width: auto;
+            /* makes the button smaller*/
+        }
+
+        .bottom-buttons button:hover {
+            transform: translateY(-2px);
+            /* moves the button up slightly on hover*/
+            box-shadow: 0 3px 10px rgba(128, 128, 128, 0.5);
+            border-color: #3f22ff;
+            color: #3f22ff;
+        }
+
+        .bottom-buttons button i {
+            transition: transform 0.3s ease;
+            /* smooth transition for the icon*/
+        }
+
+        .back-to-login:hover i {
+            transform: translateX(-3px);
+            /* moves the icon left on hover*/
+        }
+
+        .back-to-menu:hover i {
+            transform: translateX(3px);
+            /* moves the icon right on hover*/
+        }
+
+        /* adjusting the position of "Already a member? Sign In" */
+        .left-half h4 {
+            margin-top: 30px;
+        }
+
+        /* add styling for the "Sign up with Google" button*/
+        .google-signup {
+            background-color: #ffffff;
+            color: #333;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            box-shadow: none;
+            /*removes default box shadow*/
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .google-signup:hover {
+            background-color: #f1f1f1;
+            box-shadow: none;
+            /* removes the shadow on hover*/
+        }
+
+        .google-signup i {
+            color: #8a8a8a;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- company logo -->
+    <div class="company-logo">
+        <div>
+            <img class="logo-image" src="ice.png" alt="Socialite Logo">
+        </div>
+        <span class="company-name">Socialite</span>
+    </div>
+
+    <!-- main container -->
+    <div class="content-box">
+        <!--left half of the container-->
+        <div class="left-half">
+            <div class="profile-upload">
+                <img id="profilePreview" src="https://via.placeholder.com/150" alt="Profile Preview"
+                    class="profile-preview">
+                <input type="file" id="profilePicture" accept="image/*" required>
+            </div>
+            <div>
+                <h4>Already a member?</h4>
+                <a href="page.html"><button class="b1">Sign In</button></a>
+            </div>
+        </div>
+        <!-- right half of the container-->
+        <div class="right-half">
+            <h2 style="margin-bottom: 15px;">Sign up:</h2>
+            <form class="signup-form" id="signupForm" enctype="multipart/form-data">
+                <!-- Input fields with icons -->
+                <div class="inputGroup">
+                    <i class="fas fa-user"></i> <!--fas fa classes are used for icons-->
+                    <input type="text" id="name" placeholder="Name" required>
+                </div>
+                <div class="inputGroup">
+                    <i class="fas fa-briefcase"></i>
+                    <input type="text" id="designation" placeholder="Designation" required>
+                </div>
+                <div class="inputGroup">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="inputGroup">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="inputGroup">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                </div>
+                <p class="error" id="errorMessage"></p>
+                <button type="submit" style="justify-content: center ">Sign Up</button>
+                <!-- google Signup Button -->
+                <button class="google-signup b2">
+                    <i class="fab fa-google"></i> Sign up with Google
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bottom buttons -->
+    <div class="bottom-buttons">
+        <button class="back-to-menu">
+            Go Back to Main Page <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+
+    <script>
+        const API_BASE_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:5002'
+            : 'https://socialouf-6.onrender.com';
+
+        const profilePicture = document.getElementById('profilePicture');
+        const profilePreview = document.getElementById('profilePreview');
+        const signupForm = document.getElementById('signupForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Update profile preview when file is selected
+        profilePicture.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                    errorMessage.textContent = "File size must be less than 5MB";
+                    profilePicture.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle form submission
+        signupForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            errorMessage.textContent = '';
+
+            const formData = new FormData();
+            formData.append('name', document.getElementById('name').value);
+            formData.append('designation', document.getElementById('designation').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('password', document.getElementById('password').value);
+            formData.append('confirmPassword', document.getElementById('confirmPassword').value);
+
+            const profilePicFile = document.getElementById('profilePicture').files[0];
+            if (profilePicFile) {
+                formData.append('profilePicture', profilePicFile);
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert(data.message);
+                    window.location.href = "thankYou.html";
+                } else {
+                    errorMessage.textContent = data.message || "An error occurred during signup.";
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.textContent = "Failed to connect to the server.";
+            }
+        });
+    </script>
+</body>
+
+</html>

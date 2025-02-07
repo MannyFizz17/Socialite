@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socialite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #ffffff;
+            color: #222;
+        }
+
+        /* Navbar */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: #007bff;
+            color: white;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #0056b3;
+        }
+
+        /* Profile Section */
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        /* About Section */
+        #about-section {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            max-width: 80%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Suggestions & Connections Section */
+        .dropdown-section {
+            margin: 20px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 80%;
+        }
+
+        .dropdown-header {
+            padding: 15px;
+            background: #007bff;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Member Cards - Horizontal Scroll */
+        .member-grid {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 15px;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+
+        .member-card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #007bff;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .connect-btn {
+            background: #007bff;
+        }
+
+        .accept-btn {
+            background: #28a745;
+        }
+
+        .decline-btn {
+            background: #dc3545;
+        }
+
+        /* Fixed Join Button */
+        .joinButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .joinButton:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">Socialite</div>
+        <div class="links">
+            <a onclick="scrollToSection('about-section')" style="margin-right: 40px;">About us</a>
+            <a onclick="scrollToSection('dropdown-section')" style="margin-right: 40px;">Suggestions</a>
+            <a onclick="scrollToSection('dropdown-section')">Connections</a>
+        </div>
+        <div class="profile">
+            <img id="profile-pic" src="https://via.placeholder.com/150" alt="Profile Picture">
+            <button onclick="logout()" class="button">Logout</button>
+        </div>
+
+    </div>
+
+    <div id="about-section">
+        <h2>About Us</h2>
+        <p id="aboutUs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, alias ea! Magnam delectus ab
+            corrupti iste distinctio velit necessitatibus amet, error, assumenda reiciendis qui laudantium quo cum
+            maiores fugit consequatur maxime placeat. Facilis temporibus maxime nostrum quisquam autem quasi id
+            repellendus debitis consequatur dignissimos fugiat cum, dolor optio vel unde aliquam? Laborum ea aspernatur,
+            molestias numquam obcaecati, aliquam tempore voluptatibus dolore autem sit culpa sint debitis recusandae
+            odio architecto beatae voluptatem repellendus molestiae dolor! Eligendi ipsa ab illum temporibus maxime
+            minima voluptate perspiciatis cum natus aspernatur quis sunt dolore ea corporis, in neque. A, eos quasi amet
+            possimus ab ducimus corrupti quisquam illo deleniti vitae ad aperiam iure ratione voluptatem quos accusamus
+            consectetur reiciendis assumenda distinctio repudiandae neque incidunt laudantium? Vel molestias officia
+            necessitatibus officiis consequatur blanditiis laudantium nobis magni laboriosam, autem nesciunt quia quo
+            ipsam recusandae amet illo molestiae! Omnis ipsam aliquid atque fugiat repellendus maxime veniam debitis at,
+            nihil voluptatum mollitia, libero impedit aut alias. Atque animi aspernatur quaerat quod, veritatis
+            distinctio quia eaque unde mollitia, corporis ut eum magnam amet voluptate ad? Illum sequi rerum nulla
+            distinctio, quidem, praesentium deserunt, veritatis ratione id atque esse corrupti recusandae eaque amet
+            aliquam asperiores numquam officiis autem optio nemo est iusto similique quis nisi. At, eos numquam enim a
+            praesentium hic, quos atque totam ut expedita, minima modi! Explicabo blanditiis perferendis corrupti minus
+            ipsum doloribus pariatur sint qui? Doloremque, harum. Autem ipsa omnis adipisci pariatur magni repellendus
+            cum eaque itaque maxime necessitatibus ad nemo dolore debitis, odit iusto doloribus placeat consequatur
+            deserunt! Consequuntur, doloremque. Aperiam explicabo ipsam totam corporis accusamus impedit veritatis
+            quibusdam recusandae mollitia provident blanditiis delectus, laudantium voluptates rerum dolore eos fuga
+            distinctio consequuntur cumque suscipit non nam modi laboriosam asperiores. Sequi expedita cum ea, eaque
+            deserunt modi aspernatur commodi quos eum id voluptatum veniam delectus voluptatibus doloribus?...</p>
+    </div>
+
+    <div class="dropdown-section">
+        <div class="dropdown-header" onclick="toggleSection('connections-content')">
+            <h2>Connections</h2>
+            <span class="dropdown-arrow">▼</span>
+        </div>
+        <div id="connections-content" class="dropdown-content member-grid"></div>
+    </div>
+
+    <div class="dropdown-section">
+        <div class="dropdown-header" onclick="toggleSection('requests-content')">
+            <h2>Connection Requests</h2>
+            <span class="dropdown-arrow">▼</span>
+        </div>
+        <div id="requests-content" class="dropdown-content member-grid"></div>
+    </div>
+
+    <div class="dropdown-section">
+        <div class="dropdown-header" onclick="toggleSection('members-content')">
+            <h2>Members</h2>
+            <span class="dropdown-arrow">▼</span>
+        </div>
+        <div id="members-content" class="dropdown-content member-grid"></div>
+    </div>
+
+    <div id="admin-section">
+        <h2>Admin Dashboard</h2>
+        <div id="pending-requests" class="member-grid"></div>
+        <textarea id="markdown-editor" rows="10" placeholder="Update front page content..."></textarea>
+        <button onclick="updateContent()" class="button connect-btn">Submit Changes</button>
+    </div>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/frontPage.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/users/me', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Failed to verify user');
+
+                const userData = await response.json();
+
+                if (userData.isAdmin) {
+                    document.getElementById('admin-section').style.display = 'block';
+                    loadPendingRequests();
+                    fetchContent();
+                }
+
+                if (userData.profilePicture) {
+                    document.getElementById('profile-pic').src = userData.profilePicture;
+                }
+
+                await Promise.all([
+                    loadConnections(),
+                    loadRequests(),
+                    loadMembers(),
+                    fetchAboutUsContent()
+                ]);
+            } catch (error) {
+                console.error('Error:', error);
+                window.location.href = '/frontPage.html';
+            }
+        });
+
+
+
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId);
+            const currentDisplay = content.style.display;
+            content.style.display = currentDisplay === 'none' ? 'grid' : 'none';
+        }
+
+        async function loadConnections() {
+            try {
+                const response = await fetch('/api/connections', {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                const connections = await response.json();
+
+                document.getElementById('connections-content').innerHTML = connections.map(connection => `
+                    <div class="member-card">
+                        <img src="${connection.profilePicture}" alt="Profile" class="profile-pic">
+                        <div class="user-info">
+                            <h3>${connection.name}</h3>
+                            <p>${connection.designation}</p>
+                            <p>${connection.email}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading connections:', error);
+            }
+        }
+
+        async function loadRequests() {
+            try {
+                const response = await fetch('/api/connections/requests', {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                const requests = await response.json();
+
+                document.getElementById('requests-content').innerHTML = requests.map(request => `
+                    <div class="member-card">
+                        <img src="${request.profilePicture}" alt="Profile" class="profile-pic">
+                        <div class="user-info">
+                            <h3>${request.name}</h3>
+                            <div class="button-group">
+                                <button onclick="respondToRequest('${request._id}', 'accept')" class="button accept-btn">Accept</button>
+                                <button onclick="respondToRequest('${request._id}', 'decline')" class="button decline-btn">Decline</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading requests:', error);
+            }
+        }
+
+        async function loadMembers() {
+            try {
+                const response = await fetch('/api/members', {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                const members = await response.json();
+
+                document.getElementById('members-content').innerHTML = members.map(member => `
+                    <div class="member-card">
+                        <img src="${member.profilePicture || 'https://via.placeholder.com/150'}" 
+                            alt="Profile" 
+                            class="profile-pic">
+                        <div class="user-info">
+                            <h3>${member.name}</h3>
+                            ${member.isConnected ?
+                        '<p>Connected</p>' :
+                        member.requestSent ?
+                            '<p>Request Pending</p>' :
+                            member.requestReceived ?
+                                '<p>Request Received</p>' :
+                                `<button onclick="sendRequest('${member._id}')" 
+                                        class="button connect-btn">Connect</button>`
+                    }
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading members:', error);
+            }
+        }
+        async function sendRequest(userId) {
+            try {
+                const response = await fetch(`/api/connections/request/${userId}`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+
+                if (!response.ok) throw new Error('Failed to send request');
+
+                alert('Connection request sent successfully');
+                await loadMembers();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to send request');
+            }
+        }
+
+        async function respondToRequest(userId, action) {
+            try {
+                const response = await fetch(`/api/connections/respond/${userId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ action })
+                });
+
+                if (!response.ok) throw new Error(`Failed to ${action} request`);
+
+                alert(`Request ${action}ed successfully`);
+                await Promise.all([
+                    loadRequests(),
+                    loadConnections(),
+                    loadMembers()
+                ]);
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`Failed to ${action} request`);
+            }
+        }
+
+        async function loadPendingRequests() {
+            try {
+                const response = await fetch('/api/admin/pending-requests', {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+
+                if (!response.ok) throw new Error('Failed to fetch requests');
+
+                const users = await response.json();
+
+                document.getElementById('pending-requests').innerHTML = users.length === 0 ?
+                    '<p>No pending requests</p>' :
+                    users.map(user => `
+                        <div class="member-card">
+                            <h3>${user.name}</h3>
+                            <p>${user.email}</p>
+                            <p>${user.designation}</p>
+                            <div class="button-group">
+                                <button onclick="handleAdminRequest('${user._id}', 'approve')" 
+                                        class="button accept-btn">Approve</button>
+                                <button onclick="handleAdminRequest('${user._id}', 'reject')" 
+                                        class="button decline-btn">Reject</button>
+                            </div>
+                        </div>
+                    `).join('');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function handleAdminRequest(userId, action) {
+            try {
+                const endpoint = action === 'approve' ?
+                    `/api/admin/approve/${userId}` :
+                    `/api/admin/reject/${userId}`;
+
+                const response = await fetch(endpoint, {
+                    method: action === 'approve' ? 'PUT' : 'DELETE',
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+
+                if (!response.ok) throw new Error(`Failed to ${action} user`);
+
+                alert(`User ${action}d successfully`);
+                await loadPendingRequests();
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`Failed to ${action} user`);
+            }
+        }
+
+        async function fetchContent() {
+            try {
+                const response = await fetch('/getContent');
+                const data = await response.json();
+                document.getElementById('markdown-editor').value = data.content || '';
+            } catch (error) {
+                console.error('Error fetching content:', error);
+            }
+        }
+
+        async function updateContent() {
+            try {
+                const content = document.getElementById('markdown-editor').value;
+                const response = await fetch('/updateContent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content })
+                });
+
+                if (!response.ok) throw new Error('Failed to update content');
+
+                alert('Content updated successfully');
+                await fetchAboutUsContent();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to update content');
+            }
+        }
+
+        async function fetchAboutUsContent() {
+            try {
+                const response = await fetch('/getContent');
+                const data = await response.json();
+
+                if (response.ok && data.content) {
+                    document.getElementById('aboutUs').textContent = data.content;
+                }
+            } catch (error) {
+                console.error('Error fetching About Us content:', error);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = '/frontPage.html';
+        }
+    </script>
+
+
+</body>
+
+</html>
